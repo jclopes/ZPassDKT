@@ -1,0 +1,73 @@
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
+
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Accordion?>
+<VBox
+    fx:controller="zpassdkt.Controller"
+    xmlns:fx="http://javafx.com/fxml"
+    >
+    <MenuBar>
+        <Menu text="Settings">
+            <MenuItem text="Salt" onAction="#handleMenuSettingsSaltAction"/>
+        </Menu>
+    </MenuBar>
+
+<GridPane  alignment="center" hgap="10" vgap="10"
+    >
+    <padding><Insets top="25" left="25" right="25" bottom="10"/></padding>
+    <Label text="Keyword?"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="0"
+        />
+    <PasswordField
+        fx:id="keywordField"
+        GridPane.hgrow="ALWAYS"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="1"
+        GridPane.columnSpan="2"
+        />
+    <Label text="What URI?"
+        GridPane.hgrow="ALWAYS"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="2"
+        />
+    <TextField
+        fx:id="uriField"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="3"
+        GridPane.columnSpan="2"
+        onAction="#handleInputChangeAction"
+        />
+    <HBox
+        spacing="10"
+        alignment="BOTTOM_RIGHT"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="4"
+        >
+        <Button text="OK"
+            defaultButton="true"
+            onAction="#handleOkButtonAction"
+            />
+        <Button text="clear"
+            onAction="#handleClearButtonAction"
+            />
+    </HBox>
+</GridPane>
+<Accordion
+    VBox.vgrow="ALWAYS"
+    />
+<Text fx:id="actiontarget" />
+</VBox>
