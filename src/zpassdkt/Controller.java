@@ -36,7 +36,7 @@ public class Controller implements Initializable {
         ClipboardContent cb = new ClipboardContent();
         cb.putString(genPass(saltField.getText(), uriField.getText(), keywordField.getText()));
         clipboard.setContent(cb);
-        actiontarget.setText("Ready to \"past\"!");
+        actiontarget.setText("Ready to \"paste\"!");
     }
 
     @FXML protected void handleClearButtonAction(ActionEvent event) {
