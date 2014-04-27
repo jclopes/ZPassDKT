@@ -49,7 +49,6 @@
         GridPane.columnIndex="0"
         GridPane.rowIndex="3"
         GridPane.columnSpan="2"
-        onAction="#handleInputChangeAction"
         />
     <HBox
         spacing="10"

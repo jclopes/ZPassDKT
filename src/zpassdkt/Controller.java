@@ -1,10 +1,10 @@
 package zpassdkt;
 
+import com.sun.org.apache.xml.internal.security.utils.Base64;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,15 +13,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
-
-import com.sun.org.apache.xml.internal.security.utils.Base64;
-import javafx.stage.Stage;
 
 
 public class Controller implements Initializable {
@@ -51,12 +49,17 @@ public class Controller implements Initializable {
     }
 
     @FXML protected void handleMenuSettingsSaltAction(ActionEvent event) throws Exception {
-        uriField.setText("settings");
         Parent settingsParent = FXMLLoader.load(getClass().getResource("settings_layout.fxml"));
         Stage settingsStage = new Stage();
         settingsStage.setTitle("Settings");
         settingsStage.setScene(new Scene(settingsParent, 300, 130));
         settingsStage.show();
+    }
+
+    public void handleApplySettingsButton(ActionEvent event) {
+        Preferences preferences = Preferences.userRoot().node(this.getClass().getName());
+        preferences.put("salt", saltField.getText());
+        ((Node) event.getSource()).getScene().getWindow().hide();
     }
 
     @Override
@@ -80,15 +83,5 @@ public class Controller implements Initializable {
         // Destructively convert base64 to base62.
         // This is ok since we don't care about reverting back to the original string.
         return base64.replaceAll("\\+", "Z").replaceAll("/", "z").replaceAll("=", "");
-    }
-
-    @FXML public void handleInputChangeAction(ActionEvent event) {
-        actiontarget.setText("");
-    }
-
-    public void handleApplySettingsButton(ActionEvent event) {
-        Preferences preferences = Preferences.userRoot().node(this.getClass().getName());
-        preferences.put("salt", saltField.getText());
-        ((Node) event.getSource()).getScene().getWindow().hide();
     }
 }
