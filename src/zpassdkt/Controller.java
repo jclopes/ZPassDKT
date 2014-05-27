@@ -68,7 +68,7 @@ public class Controller implements Initializable {
         saltField.setText(preferences.get("salt", ""));
     }
 
-    private String genPass(String input, String pass, String salt) {
+    private String genPass(String salt, String input, String pass) {
         final String res = "%s@%s:%s";
 
         MessageDigest hash = null;
