@@ -82,6 +82,6 @@ public class Controller implements Initializable {
         String base64 = Base64.encode(theDigest);
         // Destructively convert base64 to base62.
         // This is ok since we don't care about reverting back to the original string.
-        return base64.replaceAll("\\+", "Z").replaceAll("/", "z").replaceAll("=", "");
+        return base64.replaceAll("\\+", "Z").replaceAll("/", "z").replaceAll("=", "").substring(0, 16);
     }
 }
