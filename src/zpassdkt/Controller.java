@@ -1,6 +1,5 @@
 package zpassdkt;
 
-import com.sun.org.apache.xml.internal.security.utils.Base64;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +17,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
 
@@ -79,7 +79,7 @@ public class Controller implements Initializable {
         }
         byte[] theDigest = hash.digest(String.format(res, salt, input, pass).getBytes());
         // Convert the hash to base62 so that it becomes a shorter string
-        String base64 = Base64.encode(theDigest);
+        String base64 = Base64.getEncoder().encodeToString(theDigest);
         // Destructively convert base64 to base62.
         // This is ok since we don't care about reverting back to the original string.
         return base64.replaceAll("\\+", "Z").replaceAll("/", "z").replaceAll("=", "").substring(0, 16);
