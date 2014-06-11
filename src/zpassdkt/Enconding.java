@@ -10,8 +10,6 @@ import java.util.Base64;
 public class Enconding {
     public static String genPass(String salt, String input, String pass) {
         final String res = "%s@%s:%s";
-
-        System.out.print(String.format(res, salt, input, pass));
         MessageDigest hash = null;
         try {
             hash = MessageDigest.getInstance("SHA-256");
