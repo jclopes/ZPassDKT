@@ -1,20 +1,20 @@
 <component name="ArtifactManager">
-  <artifact type="javafx" name="ZPassDKT">
-    <output-path>$PROJECT_DIR$/out/artifacts/ZPassDKT</output-path>
+  <artifact type="javafx" name="ZPassApp">
+    <output-path>$PROJECT_DIR$/out/artifacts/ZPassApp</output-path>
     <properties id="javafx-properties">
       <options>
         <option name="appClass" value="zpassdkt.Main" />
-        <option name="description" value="From one keyword and a secret, generate good passwords to various sites and services." />
+        <option name="description" value="Password Generator" />
         <option name="htmlParamFile" value="" />
         <option name="nativeBundle" value="dmg" />
         <option name="paramFile" value="" />
-        <option name="title" value="ZPassDKT" />
+        <option name="title" value="ZPass" />
         <option name="vendor" value="ZuNBiD" />
       </options>
     </properties>
     <root id="root">
-      <element id="archive" name="ZPassDKT.jar">
-        <element id="module-output" name="ZPassDKT" />
+      <element id="archive" name="ZPassApp.jar">
+        <element id="module-output" name="ZPass" />
       </element>
     </root>
   </artifact>
