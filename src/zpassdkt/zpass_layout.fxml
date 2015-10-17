@@ -2,60 +2,59 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
+
 <VBox
-        fx:controller="zpassdkt.Controller"
-        xmlns:fx="http://javafx.com/fxml"
-        >
+    fx:controller="zpassdkt.Controller"
+    xmlns:fx="http://javafx.com/fxml"
+    >
     <MenuBar>
         <Menu text="Settings">
             <MenuItem text="Salt" onAction="#handleMenuSettingsSaltAction"/>
         </Menu>
     </MenuBar>
 
-    <GridPane alignment="center" hgap="10" vgap="10"
-            >
-        <padding>
-            <Insets top="25" left="25" right="25" bottom="10"/>
-        </padding>
-        <Label text="Keyword?"
-               GridPane.columnIndex="0"
-               GridPane.rowIndex="0"
-                />
-        <PasswordField
-                fx:id="keywordField"
-                GridPane.hgrow="ALWAYS"
-                GridPane.columnIndex="0"
-                GridPane.rowIndex="1"
-                GridPane.columnSpan="2"
-                />
-        <Label text="What URI?"
-               GridPane.hgrow="ALWAYS"
-               GridPane.columnIndex="0"
-               GridPane.rowIndex="2"
-                />
-        <TextField
-                fx:id="uriField"
-                GridPane.columnIndex="0"
-                GridPane.rowIndex="3"
-                GridPane.columnSpan="2"
-                />
-        <HBox
-                spacing="10"
-                alignment="BOTTOM_RIGHT"
-                GridPane.columnIndex="1"
-                GridPane.rowIndex="4"
-                >
-            <Button text="OK"
-                    defaultButton="true"
-                    onAction="#handleOkButtonAction"
-                    />
-            <Button text="clear"
-                    onAction="#handleClearButtonAction"
-                    />
-        </HBox>
-    </GridPane>
-    <Accordion
-            VBox.vgrow="ALWAYS"
+<GridPane  alignment="center" hgap="10" vgap="10"
+    >
+    <padding><Insets top="25" left="25" right="25" bottom="10"/></padding>
+    <Label text="Keyword?"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="0"
+        />
+    <PasswordField
+        fx:id="keywordField"
+        GridPane.hgrow="ALWAYS"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="1"
+        GridPane.columnSpan="2"
+        />
+    <Label text="What URI?"
+        GridPane.hgrow="ALWAYS"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="2"
+        />
+    <TextField
+        fx:id="uriField"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="3"
+        GridPane.columnSpan="2"
+        />
+    <HBox
+        spacing="10"
+        alignment="BOTTOM_RIGHT"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="4"
+        >
+        <Button text="OK"
+            defaultButton="true"
+            onAction="#handleOkButtonAction"
             />
-    <Text fx:id="actiontarget"/>
+        <Button text="clear"
+            onAction="#handleClearButtonAction"
+            />
+    </HBox>
+</GridPane>
+<Accordion
+    VBox.vgrow="ALWAYS"
+    />
+<Text fx:id="actionTarget" />
 </VBox>

@@ -1,10 +1,11 @@
 package zpassdkt;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
@@ -18,60 +19,66 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
 
-import static zpassdkt.Encoding.genPass;
-
 
 public class Controller implements Initializable {
-  final Clipboard clipboard = Clipboard.getSystemClipboard();
   @FXML
-  private Text actiontarget;
-  @FXML
-  private TextField saltField = new TextField();
+  private Text actionTarget;
   @FXML
   private TextField uriField;
   @FXML
   private PasswordField keywordField;
 
+  private final ZPassModel model = new ZPassModel();
+  final Clipboard clipboard = Clipboard.getSystemClipboard();
+
   @FXML
   protected void handleOkButtonAction(ActionEvent event) {
     ClipboardContent cb = new ClipboardContent();
     Preferences preferences = Preferences.userRoot().node(this.getClass().getName());
-    String salt = preferences.get("salt", "");
-    cb.putString(genPass(salt, uriField.getText(), keywordField.getText()));
+    model.setKeyword(keywordField.getText());
+    model.setUrl(uriField.getText());
+
+    cb.putString(model.getPass());
     clipboard.setContent(cb);
-    actiontarget.setText("Ready to \"paste\"!");
+    actionTarget.setText("Ready to \"paste\"!");
   }
 
   @FXML
   protected void handleClearButtonAction(ActionEvent event) {
     // Clear URI field
+    model.setUrl("");
     uriField.setText("");
+
     // Clear clipboard
     ClipboardContent cb = new ClipboardContent();
     cb.putString("");
     clipboard.setContent(cb);
 
-    actiontarget.setText("All clear.");
+    actionTarget.setText("All clear.");
   }
 
   @FXML
   protected void handleMenuSettingsSaltAction(ActionEvent event) throws Exception {
-    Parent settingsParent = FXMLLoader.load(getClass().getResource("settings_layout.fxml"));
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("settings_layout.fxml"));
+    Parent settingsParent = loader.load();
+    SettingsController settingsController = (SettingsController) loader.getController();
+    settingsController.saltProperty().addListener(
+        new ChangeListener<String>() {
+          @Override
+          public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+            model.setSalt(newValue);
+          }
+        }
+    );
     Stage settingsStage = new Stage();
     settingsStage.setTitle("Settings");
     settingsStage.setScene(new Scene(settingsParent, 300, 130));
     settingsStage.show();
   }
 
-  public void handleApplySettingsButton(ActionEvent event) {
-    Preferences preferences = Preferences.userRoot().node(this.getClass().getName());
-    preferences.put("salt", saltField.getText());
-    ((Node) event.getSource()).getScene().getWindow().hide();
-  }
-
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     Preferences preferences = Preferences.userRoot().node(this.getClass().getName());
-    saltField.setText(preferences.get("salt", ""));
+    model.setSalt(preferences.get("salt", ""));
   }
 }
