@@ -18,7 +18,7 @@ import java.util.prefs.Preferences;
 public class SettingsController implements Initializable {
   @FXML
   private TextField saltField;
-  private StringProperty salt = new SimpleStringProperty(this, "", "");
+  private StringProperty salt = new SimpleStringProperty(this, "salt");
 
   public String getSalt() {
     return salt.get();
